@@ -1,0 +1,109 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.hero {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: clamp(20px, 3vh, 48px);
+  position: relative;
+  overflow: hidden;
+  scroll-snap-align: start;
+}
+
+.bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(20,12,8,0.35) 0%, rgba(20,12,8,0.55) 60%, rgba(20,12,8,0.8) 100%),
+    linear-gradient(135deg, #c4a08a 0%, #8a6048 30%, #3d2418 70%, #1e1208 100%);
+}
+
+.inner {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 760px;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba($white, 0.75);
+  margin-bottom: 24px;
+  animation: hero-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both 0.1s;
+}
+
+.eyebrowDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: $rose-light;
+  flex-shrink: 0;
+}
+
+.title {
+  font-size: clamp(48px, 8vw, 88px);
+  font-weight: 600;
+  color: $white;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+  margin-bottom: 24px;
+  animation: hero-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both 0.3s;
+
+  em {
+    font-style: italic;
+    color: $rose-light;
+  }
+}
+
+.sub {
+  font-size: clamp(16px, 2vw, 19px);
+  color: rgba($white, 0.8);
+  line-height: 1.6;
+  max-width: 580px;
+  margin: 0 auto 36px;
+  animation: hero-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both 0.55s;
+}
+
+.ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 48px;
+  animation: hero-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both 0.75s;
+}
+
+.proof {
+  display: inline-flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 13px;
+  color: rgba($white, 0.7);
+  animation: hero-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both 0.95s;
+
+  strong { color: $white; }
+}
+
+.divider {
+  display: inline-block;
+  width: 1px;
+  height: 12px;
+  background: rgba($white, 0.3);
+}
+
+@keyframes hero-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to { opacity: 1; transform: none; }
+}

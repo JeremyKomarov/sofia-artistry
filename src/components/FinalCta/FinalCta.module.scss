@@ -1,0 +1,86 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.section {
+  background: $cream-2;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 800px;
+    height: 800px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($rose, 0.08), transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.inner {
+  display: grid;
+  gap: 40px;
+  position: relative;
+
+  @include respond(lg) {
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 48px;
+  }
+}
+
+.copy {
+  h2 {
+    font-size: clamp(28px, 4vw, 46px);
+    margin: 10px 0 12px;
+
+    em { font-style: italic; color: $rose; }
+  }
+
+  p {
+    font-size: 16px;
+    color: $ink-soft;
+    line-height: 1.65;
+    margin-bottom: 20px;
+  }
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: $gold;
+}
+
+.trust {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: $ink-soft;
+  }
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: $rose;
+  flex-shrink: 0;
+}
+
+.formWrap {
+  width: 100%;
+}

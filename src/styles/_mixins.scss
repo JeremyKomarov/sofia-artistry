@@ -1,0 +1,20 @@
+@use 'variables' as *;
+
+@mixin respond($bp) {
+  @if $bp == sm { @media (min-width: 480px) { @content; } }
+  @if $bp == md { @media (min-width: 700px) { @content; } }
+  @if $bp == lg { @media (min-width: 900px) { @content; } }
+  @if $bp == xl { @media (min-width: 1160px) { @content; } }
+}
+
+@mixin respond-max($bp) {
+  @if $bp == md { @media (max-width: 699px) { @content; } }
+  @if $bp == lg { @media (max-width: 899px) { @content; } }
+}
+
+@mixin container {
+  max-width: 1160px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px;
+}

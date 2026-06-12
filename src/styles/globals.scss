@@ -1,0 +1,236 @@
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// =====================================================================
+// CSS CUSTOM PROPERTIES
+// =====================================================================
+:root {
+  --rose: #{$rose};
+  --rose-rgb: #{$rose-rgb};
+  --rose-light: #{$rose-light};
+  --rose-deep: #{$rose-deep};
+  --gold: #{$gold};
+  --gold-light: #{$gold-light};
+  --gold-rgb: #{$gold-rgb};
+  --cream: #{$cream};
+  --cream-2: #{$cream-2};
+  --cream-3: #{$cream-3};
+  --white: #{$white};
+  --ink: #{$ink};
+  --ink-soft: #{$ink-soft};
+  --ink-muted: #{$ink-muted};
+  --ink-subtle: #{$ink-subtle};
+  --border: #{$border};
+  --border-soft: #{$border-soft};
+  --font-display: #{$font-display};
+  --font-body: #{$font-body};
+  --radius-sm: #{$radius-sm};
+  --radius: #{$radius};
+  --radius-lg: #{$radius-lg};
+  --radius-xl: #{$radius-xl};
+  --shadow-sm: #{$shadow-sm};
+  --shadow: #{$shadow};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-hero: #{$shadow-hero};
+  --nav-height: #{$nav-height};
+}
+
+// =====================================================================
+// RESET & BASE
+// =====================================================================
+*, *::before, *::after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+body {
+  font-family: $font-body;
+  font-size: 17px;
+  line-height: 1.7;
+  color: $ink;
+  background: $cream;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: $font-display;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: $ink;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+// =====================================================================
+// SECTION BASE
+// =====================================================================
+section {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  scroll-snap-align: start;
+  // Reserve space for the fixed nav so content always clears it
+  padding-top: $nav-height;
+
+  & > .container {
+    padding-top: clamp(6px, 1.2vh, 20px);
+    padding-bottom: clamp(6px, 1.2vh, 20px);
+  }
+}
+
+.container {
+  @include container;
+}
+
+.bg-cream { background: $cream; }
+.bg-cream-2 { background: $cream-2; }
+.bg-white { background: $white; }
+
+// =====================================================================
+// BUTTONS
+// =====================================================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 28px;
+  border-radius: 100px;
+  font-family: $font-body;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border: 0;
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: $rose;
+  color: $white;
+  box-shadow: 0 4px 16px rgba($rose, 0.35);
+
+  &:hover {
+    background: $rose-deep;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba($rose, 0.45);
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  border: 1.5px solid $ink;
+  color: $ink;
+
+  &:hover {
+    background: $ink;
+    color: $white;
+  }
+}
+
+.btn-ghost-rose {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  color: $white;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.15);
+  }
+}
+
+.btn-link {
+  color: $gold;
+  font-weight: 500;
+  font-size: 14px;
+  padding: 0;
+  background: none;
+  border: 0;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  text-decoration: none;
+
+  &::after { content: ' \2192'; }
+  &:hover { color: $rose; }
+}
+
+// =====================================================================
+// SCROLL REVEAL
+// =====================================================================
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 680ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  &.in-view {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+// =====================================================================
+// SECTION HEADER
+// =====================================================================
+.section-header {
+  margin-bottom: clamp(10px, 1.4vh, 24px);
+
+  &--center {
+    text-align: center;
+  }
+
+  &__eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: $gold;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-size: clamp(28px, 4vw, 46px);
+    margin-bottom: 12px;
+
+    em {
+      font-style: italic;
+      color: $rose;
+    }
+  }
+
+  p {
+    font-size: 16px;
+    color: $ink-soft;
+    max-width: 560px;
+    line-height: 1.6;
+  }
+
+  &--center p {
+    margin: 0 auto;
+  }
+}

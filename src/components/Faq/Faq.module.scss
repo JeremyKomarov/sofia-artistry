@@ -1,0 +1,66 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.section {
+  background: $cream;
+}
+
+.list {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.item {
+  border-bottom: 1px solid $border;
+
+  &:first-child { border-top: 1px solid $border; }
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  background: none;
+  border: 0;
+  text-align: left;
+  font-family: $font-body;
+  font-size: 16px;
+  font-weight: 500;
+  color: $ink;
+  cursor: pointer;
+  transition: color 180ms;
+
+  &:hover { color: $rose; }
+}
+
+.chevron {
+  font-size: 10px;
+  color: $ink-muted;
+  flex-shrink: 0;
+  transition: transform 250ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  .itemOpen & { transform: rotate(180deg); color: $rose; }
+}
+
+.answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 300ms cubic-bezier(0.22, 1, 0.36, 1);
+
+  .itemOpen & { grid-template-rows: 1fr; }
+
+  // Inner wrapper needed for grid row animation
+  > div {
+    overflow: hidden;
+  }
+
+  p {
+    padding-bottom: 20px;
+    font-size: 15px;
+    color: $ink-soft;
+    line-height: 1.7;
+  }
+}

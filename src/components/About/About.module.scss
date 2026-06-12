@@ -1,0 +1,171 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.section { background: $cream-2; }
+
+.inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 36px;
+  text-align: center;
+
+  @include respond(lg) {
+    flex-direction: row;
+    text-align: left;
+    gap: 60px;
+  }
+}
+
+.photoWrap {
+  position: relative;
+  padding-bottom: 28px;
+  flex-shrink: 0;
+
+  @include respond(lg) {
+    padding-right: 28px;
+  }
+}
+
+.photo {
+  width: 100%;
+  max-width: 280px;
+  aspect-ratio: 3/4;
+  border-radius: $radius-xl;
+  background: linear-gradient(135deg, #d4b0a0 0%, #8a5545 60%, #3d1e14 100%);
+  box-shadow: $shadow-hero;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba($white, 0.4);
+  font-size: 14px;
+  overflow: hidden;
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 20px;
+    border: 1px solid rgba($gold, 0.3);
+    border-radius: calc(#{$radius-xl} - 10px);
+    pointer-events: none;
+  }
+}
+
+.photoPlaceholder {
+  position: relative;
+  z-index: 1;
+}
+
+.credential {
+  position: absolute;
+  bottom: 0;
+  right: 4px;
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius;
+  padding: 14px 18px;
+  box-shadow: $shadow-lg;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  white-space: nowrap;
+
+  @include respond-max(lg) {
+    right: 0;
+    left: 0;
+    margin: 0 auto;
+    width: fit-content;
+  }
+}
+
+// Float animation triggered when .photo gets in-view
+:global(.in-view) ~ .credential {
+  animation: float 3.8s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.credentialIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: $cream-2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    stroke: $gold;
+  }
+}
+
+.credentialText {
+  strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  span {
+    font-size: 12px;
+    color: $ink-muted;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+
+  h2 {
+    font-size: clamp(26px, 3.5vw, 40px);
+    em { font-style: italic; color: $rose; }
+  }
+
+  p {
+    font-size: 15px;
+    color: $ink-soft;
+    line-height: 1.65;
+  }
+}
+
+.cta {
+  align-self: flex-start;
+
+  @include respond-max(lg) {
+    align-self: center;
+  }
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    color: $ink-soft;
+    text-align: left;
+  }
+}
+
+.check {
+  color: $gold;
+  font-weight: 600;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}

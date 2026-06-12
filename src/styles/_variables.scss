@@ -1,0 +1,37 @@
+// Design tokens — mirrors reference.html :root variables
+
+$rose: #c9847a;
+$rose-rgb: 201, 132, 122;
+$rose-light: #e8c4bb;
+$rose-deep: #a85f55;
+$gold: #c4956a;
+$gold-light: #e2c49a;
+$gold-rgb: 196, 149, 106;
+
+$cream: #faf7f4;
+$cream-2: #f4ede8;
+$cream-3: #ede3db;
+$white: #ffffff;
+
+$ink: #2c2017;
+$ink-soft: #5a4a3f;
+$ink-muted: #8a7a70;
+$ink-subtle: #b5a89e;
+
+$border: rgba(44, 32, 23, 0.1);
+$border-soft: rgba(44, 32, 23, 0.06);
+
+$font-display: 'Cormorant Garamond', Georgia, serif;
+$font-body: 'DM Sans', system-ui, sans-serif;
+
+$radius-sm: 6px;
+$radius: 12px;
+$radius-lg: 20px;
+$radius-xl: 32px;
+
+$shadow-sm: 0 1px 3px rgba(44, 32, 23, 0.06), 0 2px 8px rgba(44, 32, 23, 0.04);
+$shadow: 0 4px 16px rgba(44, 32, 23, 0.08), 0 1px 3px rgba(44, 32, 23, 0.05);
+$shadow-lg: 0 8px 32px rgba(44, 32, 23, 0.12), 0 2px 6px rgba(44, 32, 23, 0.06);
+$shadow-hero: 0 20px 60px rgba(44, 32, 23, 0.18);
+
+$nav-height: 72px;

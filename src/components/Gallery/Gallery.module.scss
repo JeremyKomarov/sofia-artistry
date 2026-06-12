@@ -1,0 +1,97 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.section { background: $cream-2; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+
+  @include respond(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.item {
+  aspect-ratio: 4/3;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  background: $cream-3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 300ms ease, box-shadow 300ms ease;
+
+  &:hover {
+    transform: scale(1.04);
+    box-shadow: $shadow-hero;
+    z-index: 1;
+  }
+
+  &:nth-child(1) { background: linear-gradient(135deg, #d4b0a0, #a06050); }
+  &:nth-child(2) { background: linear-gradient(135deg, #c4a882, #8a6842); }
+  &:nth-child(3) { background: linear-gradient(135deg, #b8a090, #785848); }
+  &:nth-child(4) { background: linear-gradient(135deg, #c8b0a0, #906060); }
+  &:nth-child(5) { background: linear-gradient(135deg, #d0b890, #9a7858); }
+  &:nth-child(6) { background: linear-gradient(135deg, #c0a898, #806858); }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(44, 32, 23, 0);
+    transition: background 250ms;
+  }
+
+  &:hover::after {
+    background: rgba(44, 32, 23, 0.18);
+  }
+}
+
+// Hidden items
+.hidden { display: none; }
+
+// Mobile-only: visible on mobile, hidden on desktop
+.mobileOnly {
+  @include respond(md) { display: none; }
+}
+
+// Show hidden/mobileOnly when expanded
+.visible {
+  display: flex;
+
+  &.mobileOnly {
+    @include respond(md) { display: flex; }
+  }
+}
+
+.label {
+  position: absolute;
+  bottom: 14px;
+  left: 14px;
+  right: 14px;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba($white, 0.9);
+  background: rgba($ink, 0.4);
+  padding: 5px 10px;
+  border-radius: 100px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  transform: translateY(4px);
+  opacity: 0;
+  transition: opacity 200ms, transform 200ms;
+
+  .item:hover & {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.toggleWrap {
+  text-align: center;
+  margin-top: 20px;
+}

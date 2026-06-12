@@ -1,0 +1,118 @@
+@use '../../styles/variables' as *;
+@use '../../styles/mixins' as *;
+
+.section { background: $cream; }
+
+.grid {
+  display: grid;
+  gap: 20px;
+
+  @include respond(md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  background: $white;
+  border: 1px solid $border;
+  border-radius: $radius-lg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: $shadow-sm;
+  transition: transform 280ms ease, box-shadow 280ms ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow;
+  }
+}
+
+.photo {
+  aspect-ratio: 16/9;
+  background: linear-gradient(135deg, #c4a08a, #8a5545);
+  position: relative;
+  overflow: hidden;
+
+  // Shimmer on hover
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40%;
+    background: linear-gradient(90deg, transparent, rgba($white, 0.25), transparent);
+    left: -60%;
+    opacity: 0;
+  }
+
+  .card:hover &::before {
+    animation: shimmer 600ms ease forwards;
+  }
+}
+
+.photoLabel {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba($white, 0.85);
+  background: rgba($ink, 0.45);
+  padding: 4px 10px;
+  border-radius: 100px;
+  backdrop-filter: blur(4px);
+}
+
+.body {
+  padding: 20px 20px 12px;
+  flex: 1;
+
+  h3 {
+    font-size: 22px;
+    margin: 6px 0 10px;
+  }
+
+  p {
+    font-size: 14px;
+    color: $ink-soft;
+    line-height: 1.55;
+  }
+}
+
+.tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: $gold;
+  background: rgba($gold, 0.1);
+  padding: 4px 10px;
+  border-radius: 100px;
+}
+
+.footer {
+  padding: 16px 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid $border;
+}
+
+.price {
+  font-size: 16px;
+  font-weight: 600;
+  color: $ink;
+
+  span {
+    font-size: 13px;
+    font-weight: 400;
+    color: $ink-muted;
+  }
+}
+
+@keyframes shimmer {
+  from { left: -60%; opacity: 1; }
+  to   { left: 130%; opacity: 0; }
+}

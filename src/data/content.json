@@ -1,0 +1,178 @@
+{
+  "SITE": {
+    "name": "Sofia Artistry",
+    "tagline": "Makeup Artist · Los Angeles",
+    "phone": "+1 (310) 555-0192",
+    "phoneHref": "tel:+13105550192",
+    "email": "hello@sofiaartistry.com",
+    "city": "Los Angeles",
+    "serviceArea": "Los Angeles County",
+    "instagram": "https://instagram.com/sofiaartistry",
+    "tiktok": "https://tiktok.com/@sofiaartistry",
+    "pinterest": "https://pinterest.com/sofiaartistry",
+    "hours": "Mon–Sat, 8am–8pm"
+  },
+  "HERO": {
+    "eyebrow": "Available in Los Angeles & Available for Travel",
+    "headline": "Where beauty becomes art.",
+    "headlineEm": "art.",
+    "sub": "Bridal, glam, and editorial makeup for women who want to feel truly unforgettable — on their most important days.",
+    "ctaPrimary": "Book Your Look",
+    "ctaSecondary": "See My Portfolio",
+    "proof": [
+      { "value": "5.0", "label": "Google Rating" },
+      { "value": "200+", "label": "Clients" },
+      { "value": "4+", "label": "Years Experience" }
+    ]
+  },
+  "TRUST_ITEMS": [
+    { "value": "5.0 ★★★★★", "label": "Google Reviews" },
+    { "value": "200+ Clients", "label": "Brides, artists & influencers" },
+    { "value": "Same-Week Booking", "label": "For non-bridal services" },
+    { "value": "Mobile Artist", "label": "LA county + available for travel" }
+  ],
+  "SERVICES": [
+    {
+      "tag": "Most Booked",
+      "title": "Bridal Makeup",
+      "photoLabel": "Bridal glam, Los Angeles 2024",
+      "photoGradient": "linear-gradient(135deg, #c4a08a, #8a5545)",
+      "photoSrc": "/images/bridal.webp",
+      "photoAlt": "Bridal makeup look",
+      "description": "Your wedding day deserves perfection. Sofia creates timeless looks that photograph beautifully and last from the first kiss to the last dance.",
+      "price": "From $280",
+      "duration": "2.5 hrs",
+      "ctaText": "Book a trial"
+    },
+    {
+      "tag": "Events & Occasions",
+      "title": "Glam & Events",
+      "photoLabel": "Birthday glam, Malibu 2024",
+      "photoGradient": "linear-gradient(135deg, #d4b0a0, #a06050)",
+      "photoSrc": "/images/glam.webp",
+      "photoAlt": "Glam event makeup",
+      "description": "Birthday parties, galas, date nights, graduations — any moment worth celebrating deserves a look that makes you feel like the main character.",
+      "price": "From $150",
+      "duration": "1 hr",
+      "ctaText": "Book a session"
+    },
+    {
+      "tag": "Creative Looks",
+      "title": "Editorial & Photoshoots",
+      "photoLabel": "Editorial shoot, Venice Beach 2024",
+      "photoGradient": "linear-gradient(135deg, #b89080, #704838)",
+      "photoSrc": "/images/editorial.webp",
+      "photoAlt": "Editorial makeup look",
+      "description": "Bold concepts, fashion-forward looks, avant-garde artistry. Sofia collaborates with photographers, brands, and creatives to bring a vision to life on camera.",
+      "price": "From $200",
+      "duration": "session",
+      "ctaText": "Discuss your shoot"
+    }
+  ],
+  "GALLERY_ITEMS": [
+    { "label": "Bridal · Santa Monica", "src": "/images/gallery-1.webp", "alt": "Bridal makeup, Santa Monica", "hidden": false, "mobileOnly": false },
+    { "label": "Editorial · Venice", "src": "/images/gallery-2.webp", "alt": "Editorial makeup, Venice", "hidden": false, "mobileOnly": false },
+    { "label": "Glam · Beverly Hills", "src": "/images/gallery-3.webp", "alt": "Glam makeup, Beverly Hills", "hidden": false, "mobileOnly": false },
+    { "label": "Bridal Party · Malibu", "src": "/images/gallery-4.webp", "alt": "Bridal party makeup, Malibu", "hidden": false, "mobileOnly": true },
+    { "label": "Fashion Shoot", "src": "/images/gallery-5.webp", "alt": "Fashion shoot makeup", "hidden": true, "mobileOnly": false },
+    { "label": "Birthday Glam", "src": "/images/gallery-6.webp", "alt": "Birthday glam makeup", "hidden": true, "mobileOnly": false }
+  ],
+  "REVIEWS": [
+    {
+      "stars": 5,
+      "body": "Sofia made me feel like the most beautiful version of myself on my wedding day. She listened to exactly what I wanted, kept me calm all morning, and the look lasted perfectly through 12 hours of photos and dancing. Worth every penny.",
+      "name": "Amanda R.",
+      "role": "Bride · Santa Monica, CA",
+      "initial": "A"
+    },
+    {
+      "stars": 5,
+      "body": "I've been going to Sofia for two years for every special occasion. She has an incredible eye for what flatters your unique features. I never leave without feeling like a completely elevated version of myself. She's genuinely talented.",
+      "name": "Maya T.",
+      "role": "Returning Client · West Hollywood, CA",
+      "initial": "M"
+    },
+    {
+      "stars": 5,
+      "body": "We hired Sofia for a 3-day fashion shoot and she created 8 completely different editorial looks, each more stunning than the last. She understands light, camera, and storytelling in a way most artists simply don't. Booking her again immediately.",
+      "name": "James L.",
+      "role": "Creative Director · Los Angeles, CA",
+      "initial": "J"
+    }
+  ],
+  "ABOUT": {
+    "eyebrow": "Meet your artist",
+    "headline": "Hi, I'm Sofia —",
+    "headlineEm": "and I love making women feel seen.",
+    "bio": [
+      "After training at the Make-Up Designory in Los Angeles and spending three years working on film sets and fashion shoots, I launched Sofia Artistry to bring professional-grade artistry directly to real women — not just on camera, but for the moments that matter most in real life.",
+      "I believe every face is different, every event is different, and every look should feel entirely yours. My studio kit carries over 300 shades across 12 professional brands so no skin tone, texture, or style is ever outside my range."
+    ],
+    "credentials": [
+      "Certified MUA — Make-Up Designory, Los Angeles",
+      "4+ years professional experience, 200+ clients",
+      "Brands used: Charlotte Tilbury, NARS, Fenty, MAC, Armani Beauty",
+      "Worked with Vogue, Cosmopolitan, and independent brands"
+    ],
+    "credential": {
+      "title": "Certified Professional",
+      "subtitle": "Makeup Artists Guild, 2020"
+    },
+    "photoAlt": "Sofia, professional makeup artist",
+    "cta": "Book with Sofia"
+  },
+  "PROCESS_STEPS": [
+    {
+      "num": "01",
+      "label": "Step one",
+      "title": "Book in Minutes",
+      "body": "Fill out the form below — choose your service, share your date, and tell me a little about the look you have in mind. I'll confirm within 24 hours."
+    },
+    {
+      "num": "02",
+      "label": "Step two",
+      "title": "Your Consultation",
+      "body": "Every booking includes a personal consultation — by phone or in person. We discuss your skin, your event, your vision, and exactly what you want to feel like."
+    },
+    {
+      "num": "03",
+      "label": "Step three",
+      "title": "Walk Out Stunning",
+      "body": "Sit back while Sofia works her magic. Leave with a look that's fully yours — polished, photograph-ready, and built to last all day and night."
+    }
+  ],
+  "FAQ_ITEMS": [
+    {
+      "q": "Do you travel to my location?",
+      "a": "Yes — I'm a fully mobile makeup artist and come to wherever you need me. I serve all of Los Angeles County, including Santa Monica, Beverly Hills, Malibu, West Hollywood, and the San Fernando Valley. Travel outside LA County is available for an additional fee. For destination events, contact me and we'll figure it out."
+    },
+    {
+      "q": "How far in advance should I book for my wedding?",
+      "a": "For bridal bookings, I recommend reaching out 3–6 months in advance, especially for peak season (May–October). Your date is only held once a deposit is received. For non-bridal services like glam and photoshoots, 1–2 weeks is usually fine, though I do fill up on weekends."
+    },
+    {
+      "q": "Do you do bridal trials? Are they required?",
+      "a": "Trials are highly recommended for bridal clients — they're the best way to dial in your exact look before the wedding day, test product longevity on your skin, and make sure you're 100% in love with the result. Trials are a separate 2-hour appointment and are priced accordingly. They're optional but strongly encouraged."
+    },
+    {
+      "q": "What brands and products do you use?",
+      "a": "My professional kit includes products from Charlotte Tilbury, NARS, Fenty Beauty, MAC Cosmetics, Armani Beauty, Laura Mercier, and more — selected for longevity, photography performance, and wide shade inclusivity. I carry 300+ shades to match every skin tone. If you have a specific sensitivity or allergy, let me know in advance and I'll make accommodations."
+    },
+    {
+      "q": "How long does a makeup session take?",
+      "a": "A standard glam session is 45–60 minutes. Bridal appointments are 1.5–2.5 hours depending on complexity. Editorial and multi-look shoots vary by project scope. I always build in a buffer so you never feel rushed — your time with me is entirely focused on you."
+    }
+  ],
+  "FINAL_CTA": {
+    "eyebrow": "Book your appointment",
+    "headline": "Ready to feel",
+    "headlineEm": "unforgettable?",
+    "body": "Tell me about your event and I'll get back to you within 24 hours with availability and everything you need to know.",
+    "trustPoints": [
+      "Response within 24 hours — usually same day",
+      "No commitment until you confirm",
+      "Serving all of Los Angeles County",
+      "Mobile — I come to you"
+    ]
+  }
+}
