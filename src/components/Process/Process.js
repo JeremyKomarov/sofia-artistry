@@ -1,7 +1,11 @@
+'use client';
+
+import { useDraft } from '@/contexts/ContentContext';
 import { PROCESS_STEPS } from '@/constants/site';
 import styles from './Process.module.scss';
 
 export default function Process() {
+  const steps = useDraft('PROCESS_STEPS', PROCESS_STEPS);
   return (
     <section id="process" className={`bg-white ${styles.section}`} aria-labelledby="process-title">
       <div className="container">
@@ -12,7 +16,7 @@ export default function Process() {
         </div>
 
         <div className={styles.grid}>
-          {PROCESS_STEPS.map((step, i) => (
+          {steps.map((step, i) => (
             <div key={step.num} className={`${styles.step} reveal`} style={{ transitionDelay: `${i * 130}ms` }}>
               <div className={styles.num} aria-hidden="true">{step.num}</div>
               <div className={styles.numLabel}>{step.label}</div>

@@ -1,14 +1,12 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { SECTION_NAV } from '@/constants/site';
 import styles from './SectionNav.module.scss';
 
 export default function SectionNav() {
   const [active, setActive] = useState('hero');
   const [collapsed, setCollapsed] = useState(false);
-  const navRef = useRef(null);
-
   useEffect(() => {
     const obs = new IntersectionObserver(
       (entries) => {
@@ -27,21 +25,9 @@ export default function SectionNav() {
     return () => obs.disconnect();
   }, []);
 
-  // Collapse when clicking outside
-  useEffect(() => {
-    if (collapsed) return;
-    const handler = (e) => {
-      if (navRef.current && !navRef.current.contains(e.target)) {
-        setCollapsed(true);
-      }
-    };
-    document.addEventListener('click', handler);
-    return () => document.removeEventListener('click', handler);
-  }, [collapsed]);
 
   return (
     <nav
-      ref={navRef}
       className={`${styles.nav} ${collapsed ? styles.collapsed : ''}`}
       aria-label="Page sections"
     >
@@ -58,7 +44,6 @@ export default function SectionNav() {
             key={section}
             href={href}
             className={`${styles.dot} ${active === section ? styles.dotActive : ''}`}
-            onClick={() => setCollapsed(true)}
             aria-label={label}
           >
             <span className={styles.label}>{label}</span>

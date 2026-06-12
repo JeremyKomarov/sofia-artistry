@@ -63,12 +63,8 @@
   justify-content: flex-end;
   gap: 8px;
   text-decoration: none;
-  opacity: 0.45;
   transition: opacity 200ms;
   cursor: pointer;
-
-  &:hover { opacity: 0.85; }
-  &.dotActive { opacity: 1; }
 }
 
 .label {
@@ -78,10 +74,11 @@
   text-transform: uppercase;
   color: $white;
   text-shadow:
-    0 1px 4px rgba(44, 32, 23, 0.65),
-    0 0 12px rgba(44, 32, 23, 0.3);
+    0 1px 3px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 0, 0, 0.7),
+    0 0 18px rgba(0, 0, 0, 0.5);
   white-space: nowrap;
-  opacity: 0.55;
+  opacity: 0.65;
   transition: opacity 150ms;
 
   .dot:hover &,
@@ -89,18 +86,24 @@
 }
 
 .pip {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 0 0 1.5px rgba(44, 32, 23, 0.35);
+  background: rgba(255, 255, 255, 0.9);
+  opacity: 0.5;
+  box-shadow:
+    0 0 0 1.5px rgba(0, 0, 0, 0.4),
+    0 1px 4px rgba(0, 0, 0, 0.5);
   flex-shrink: 0;
-  transition: width 200ms, background 200ms, border-radius 200ms, box-shadow 200ms;
+  transition: width 200ms, background 200ms, border-radius 200ms, box-shadow 200ms, opacity 200ms;
+
+  .dot:hover & { opacity: 0.85; }
 
   .dotActive & {
     width: 16px;
     border-radius: 3px;
     background: $rose;
-    box-shadow: none;
+    opacity: 1;
+    box-shadow: 0 0 6px rgba($rose, 0.5);
   }
 }

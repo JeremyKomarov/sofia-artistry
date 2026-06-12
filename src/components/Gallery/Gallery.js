@@ -1,10 +1,12 @@
 'use client';
 
 import { useRef, useState } from 'react';
+import { useDraft } from '@/contexts/ContentContext';
 import { GALLERY_ITEMS } from '@/constants/site';
 import styles from './Gallery.module.scss';
 
 export default function Gallery() {
+  const galleryItems = useDraft('GALLERY_ITEMS', GALLERY_ITEMS);
   const [expanded, setExpanded] = useState(false);
   const [animating, setAnimating] = useState(false);
   const gridRef = useRef(null);
@@ -70,7 +72,7 @@ export default function Gallery() {
         </div>
 
         <div ref={gridRef} className={styles.grid}>
-          {GALLERY_ITEMS.map((item, i) => (
+          {galleryItems.map((item, i) => (
             <div
               key={i}
               data-extra={item.hidden || item.mobileOnly ? true : undefined}

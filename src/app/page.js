@@ -1,3 +1,4 @@
+import { ContentProvider } from '@/contexts/ContentContext';
 import Header from '@/components/Header/Header';
 import Hero from '@/components/Hero/Hero';
 import TrustBar from '@/components/TrustBar/TrustBar';
@@ -16,7 +17,7 @@ import StickyCta from '@/components/StickyCta/StickyCta';
 
 export default function Home() {
   return (
-    <>
+    <ContentProvider>
       <JsonLd />
       <Header />
       <main>
@@ -34,6 +35,6 @@ export default function Home() {
       <SectionNav />
       <StickyCta />
       <RevealObserver />
-    </>
+    </ContentProvider>
   );
 }

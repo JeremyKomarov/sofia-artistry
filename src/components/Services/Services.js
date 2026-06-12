@@ -1,7 +1,11 @@
+'use client';
+
+import { useDraft } from '@/contexts/ContentContext';
 import { SERVICES } from '@/constants/site';
 import styles from './Services.module.scss';
 
 export default function Services() {
+  const services = useDraft('SERVICES', SERVICES);
   return (
     <section id="services" className={`bg-cream ${styles.section}`} aria-labelledby="services-title">
       <div className="container">
@@ -15,7 +19,7 @@ export default function Services() {
         </div>
 
         <div className={styles.grid}>
-          {SERVICES.map((svc, i) => (
+          {services.map((svc, i) => (
             <div key={svc.title} className={`${styles.card} reveal`} style={{ transitionDelay: `${i * 80}ms` }}>
               <div className={styles.photo} style={{ background: svc.photoGradient }}>
                 <span className={styles.photoLabel}>{svc.photoLabel}</span>

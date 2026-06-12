@@ -1,10 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { useDraft } from '@/contexts/ContentContext';
 import { SITE, NAV_LINKS } from '@/constants/site';
 import styles from './Header.module.scss';
 
 export default function Header() {
+  const site = useDraft('SITE', SITE);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -20,8 +22,8 @@ export default function Header() {
     <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`} aria-label="Main navigation">
       <div className={styles.inner}>
         <a href="#" className={styles.logo} onClick={close}>
-          {SITE.name}
-          <span>{SITE.tagline}</span>
+          {site.name}
+          <span>{site.tagline}</span>
         </a>
 
         <ul className={`${styles.links} ${open ? styles.linksOpen : ''}`} role="list">
@@ -33,7 +35,7 @@ export default function Header() {
         </ul>
 
         <div className={styles.cta}>
-          <a href={SITE.phoneHref} className={styles.phone}>{SITE.phone}</a>
+          <a href={site.phoneHref} className={styles.phone}>{site.phone}</a>
           <a href="#lead-form" className="btn btn-primary" onClick={close}>Book Now</a>
         </div>
 

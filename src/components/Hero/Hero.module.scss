@@ -84,11 +84,11 @@
 }
 
 .proof {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 16px;
-  flex-wrap: wrap;
   justify-content: center;
+  gap: 0;
+  flex-wrap: wrap;
   font-size: 13px;
   color: rgba($white, 0.7);
   animation: hero-rise 0.55s cubic-bezier(0.22, 1, 0.36, 1) both 0.95s;
@@ -101,6 +101,8 @@
   width: 1px;
   height: 12px;
   background: rgba($white, 0.3);
+  margin: 0 16px;
+  flex-shrink: 0;
 }
 
 @keyframes hero-rise {

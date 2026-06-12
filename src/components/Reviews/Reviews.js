@@ -1,7 +1,11 @@
+'use client';
+
+import { useDraft } from '@/contexts/ContentContext';
 import { REVIEWS } from '@/constants/site';
 import styles from './Reviews.module.scss';
 
 export default function Reviews() {
+  const reviews = useDraft('REVIEWS', REVIEWS);
   return (
     <section id="reviews" className={`bg-white ${styles.section}`} aria-labelledby="reviews-title">
       <div className="container">
@@ -11,7 +15,7 @@ export default function Reviews() {
         </div>
 
         <div className={styles.grid}>
-          {REVIEWS.map((r, i) => (
+          {reviews.map((r, i) => (
             <div key={r.name} className={`${styles.card} reveal`} style={{ transitionDelay: `${i * 80}ms` }}>
               <div className={styles.stars} aria-label={`${r.stars} out of 5 stars`}>{'★'.repeat(r.stars)}</div>
               <div className={styles.mark} aria-hidden="true">&ldquo;</div>

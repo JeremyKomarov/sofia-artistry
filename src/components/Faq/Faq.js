@@ -1,10 +1,12 @@
 'use client';
 
 import { useState } from 'react';
+import { useDraft } from '@/contexts/ContentContext';
 import { FAQ_ITEMS } from '@/constants/site';
 import styles from './Faq.module.scss';
 
 export default function Faq() {
+  const faqItems = useDraft('FAQ_ITEMS', FAQ_ITEMS);
   const [open, setOpen] = useState(null);
 
   const toggle = (i) => setOpen(open === i ? null : i);
@@ -18,7 +20,7 @@ export default function Faq() {
         </div>
 
         <div className={`${styles.list} reveal`}>
-          {FAQ_ITEMS.map((item, i) => (
+          {faqItems.map((item, i) => (
             <div key={i} className={`${styles.item} ${open === i ? styles.itemOpen : ''}`}>
               <button
                 className={styles.trigger}

@@ -1,3 +1,6 @@
+'use client';
+
+import { useDraft } from '@/contexts/ContentContext';
 import { TRUST_ITEMS } from '@/constants/site';
 import styles from './TrustBar.module.scss';
 
@@ -13,10 +16,11 @@ const ICONS = [
 ];
 
 export default function TrustBar() {
+  const items = useDraft('TRUST_ITEMS', TRUST_ITEMS);
   return (
     <div className={styles.trustBar} aria-label="Why clients trust Sofia">
       <div className={styles.inner}>
-        {TRUST_ITEMS.map((item, i) => (
+        {items.map((item, i) => (
           <div key={i} className={`${styles.item} reveal`} style={{ transitionDelay: `${i * 80}ms` }}>
             <div className={styles.icon}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true">

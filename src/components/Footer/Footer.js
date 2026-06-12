@@ -1,7 +1,11 @@
+'use client';
+
+import { useDraft } from '@/contexts/ContentContext';
 import { SITE, FOOTER_LINKS } from '@/constants/site';
 import styles from './Footer.module.scss';
 
 export default function Footer() {
+  const site = useDraft('SITE', SITE);
   const year = new Date().getFullYear();
 
   return (
@@ -10,19 +14,19 @@ export default function Footer() {
         <div className={styles.inner}>
           <div className={styles.brand}>
             <div className={styles.logo}>
-              {SITE.name}
+              {site.name}
               <span>Makeup Artist</span>
             </div>
             <address className={styles.nap}>
-              Available throughout {SITE.serviceArea}<br />
-              <a href={SITE.phoneHref}>{SITE.phone}</a><br />
-              <a href={`mailto:${SITE.email}`}>{SITE.email}</a><br />
-              {SITE.hours}
+              Available throughout {site.serviceArea}<br />
+              <a href={site.phoneHref}>{site.phone}</a><br />
+              <a href={`mailto:${site.email}`}>{site.email}</a><br />
+              {site.hours}
             </address>
             <div className={styles.social} aria-label="Social media">
-              <a href={SITE.instagram} rel="noopener" target="_blank" aria-label="Instagram">IG</a>
-              <a href={SITE.tiktok} rel="noopener" target="_blank" aria-label="TikTok">TK</a>
-              <a href={SITE.pinterest} rel="noopener" target="_blank" aria-label="Pinterest">PT</a>
+              <a href={site.instagram} rel="noopener" target="_blank" aria-label="Instagram">IG</a>
+              <a href={site.tiktok} rel="noopener" target="_blank" aria-label="TikTok">TK</a>
+              <a href={site.pinterest} rel="noopener" target="_blank" aria-label="Pinterest">PT</a>
             </div>
           </div>
 
@@ -57,7 +61,7 @@ export default function Footer() {
         </div>
 
         <div className={styles.bottom}>
-          <span>&copy; {year} {SITE.name}. All rights reserved.</span>
+          <span>&copy; {year} {site.name}. All rights reserved.</span>
           <div className={styles.legal}>
             <a href="/privacy">Privacy Policy</a>
             <a href="/terms">Terms</a>
