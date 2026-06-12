@@ -1,6 +1,6 @@
 {
   "SITE": {
-    "name": "Sofia Artistry",
+    "name": "Sofia Artistry2",
     "tagline": "Makeup Artist · Los Angeles",
     "phone": "+1 (310) 555-0192",
     "phoneHref": "tel:+13105550192",
@@ -20,16 +20,37 @@
     "ctaPrimary": "Book Your Look",
     "ctaSecondary": "See My Portfolio",
     "proof": [
-      { "value": "5.0", "label": "Google Rating" },
-      { "value": "200+", "label": "Clients" },
-      { "value": "4+", "label": "Years Experience" }
+      {
+        "value": "5.0",
+        "label": "Google Rating"
+      },
+      {
+        "value": "200+",
+        "label": "Clients"
+      },
+      {
+        "value": "4+",
+        "label": "Years Experience"
+      }
     ]
   },
   "TRUST_ITEMS": [
-    { "value": "5.0 ★★★★★", "label": "Google Reviews" },
-    { "value": "200+ Clients", "label": "Brides, artists & influencers" },
-    { "value": "Same-Week Booking", "label": "For non-bridal services" },
-    { "value": "Mobile Artist", "label": "LA county + available for travel" }
+    {
+      "value": "5.0 ★★★★★",
+      "label": "Google Reviews"
+    },
+    {
+      "value": "200+ Clients",
+      "label": "Brides, artists & influencers"
+    },
+    {
+      "value": "Same-Week Booking",
+      "label": "For non-bridal services"
+    },
+    {
+      "value": "Mobile Artist",
+      "label": "LA county + available for travel"
+    }
   ],
   "SERVICES": [
     {
@@ -70,12 +91,48 @@
     }
   ],
   "GALLERY_ITEMS": [
-    { "label": "Bridal · Santa Monica", "src": "/images/gallery-1.webp", "alt": "Bridal makeup, Santa Monica", "hidden": false, "mobileOnly": false },
-    { "label": "Editorial · Venice", "src": "/images/gallery-2.webp", "alt": "Editorial makeup, Venice", "hidden": false, "mobileOnly": false },
-    { "label": "Glam · Beverly Hills", "src": "/images/gallery-3.webp", "alt": "Glam makeup, Beverly Hills", "hidden": false, "mobileOnly": false },
-    { "label": "Bridal Party · Malibu", "src": "/images/gallery-4.webp", "alt": "Bridal party makeup, Malibu", "hidden": false, "mobileOnly": true },
-    { "label": "Fashion Shoot", "src": "/images/gallery-5.webp", "alt": "Fashion shoot makeup", "hidden": true, "mobileOnly": false },
-    { "label": "Birthday Glam", "src": "/images/gallery-6.webp", "alt": "Birthday glam makeup", "hidden": true, "mobileOnly": false }
+    {
+      "label": "Bridal · Santa Monica",
+      "src": "/images/gallery-1.webp",
+      "alt": "Bridal makeup, Santa Monica",
+      "hidden": false,
+      "mobileOnly": false
+    },
+    {
+      "label": "Editorial · Venice",
+      "src": "/images/gallery-2.webp",
+      "alt": "Editorial makeup, Venice",
+      "hidden": false,
+      "mobileOnly": false
+    },
+    {
+      "label": "Glam · Beverly Hills",
+      "src": "/images/gallery-3.webp",
+      "alt": "Glam makeup, Beverly Hills",
+      "hidden": false,
+      "mobileOnly": false
+    },
+    {
+      "label": "Bridal Party · Malibu",
+      "src": "/images/gallery-4.webp",
+      "alt": "Bridal party makeup, Malibu",
+      "hidden": false,
+      "mobileOnly": true
+    },
+    {
+      "label": "Fashion Shoot",
+      "src": "/images/gallery-5.webp",
+      "alt": "Fashion shoot makeup",
+      "hidden": true,
+      "mobileOnly": false
+    },
+    {
+      "label": "Birthday Glam",
+      "src": "/images/gallery-6.webp",
+      "alt": "Birthday glam makeup",
+      "hidden": true,
+      "mobileOnly": false
+    }
   ],
   "REVIEWS": [
     {
