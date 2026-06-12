@@ -1,11 +1,11 @@
 {
   "SITE": {
-    "name": "Sofia Artistry2",
+    "name": "Sofia Artistry HELLO",
     "tagline": "Makeup Artist · Los Angeles",
     "phone": "+1 (310) 555-0192yyy",
     "phoneHref": "tel:+13105550192",
     "email": "hello@sofiaartistry.com",
-    "city": "Los Angeles",
+    "city": "Los Angele",
     "serviceArea": "Los Angeles County",
     "instagram": "https://instagram.com/sofiaartistry",
     "tiktok": "https://tiktok.com/@sofiaartistry",
@@ -40,7 +40,7 @@
       "label": "Google Reviews"
     },
     {
-      "value": "200+ Clients",
+      "value": "210+ Clients",
       "label": "Brides, artists & influencers"
     },
     {
