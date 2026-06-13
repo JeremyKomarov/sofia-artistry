@@ -6,6 +6,7 @@ import ArrayEditor from "./ArrayEditor";
 import HrefField from "./HrefField";
 import LeadsTab from "./LeadsTab";
 import VisitorsTab from "./VisitorsTab";
+import SitesTab from "./SitesTab";
 
 function setNestedValue(obj, path, value) {
   const segments = path.replace(/\[(\d+)\]/g, ".$1").split(".");
@@ -145,7 +146,7 @@ const BLANK_GALLERY = { label: "", src: "", alt: "", hidden: false, mobileOnly: 
 const BLANK_REVIEW = { stars: 5, body: "", name: "", role: "", initial: "" };
 const BLANK_FAQ = { q: "", a: "" };
 
-export default function Editor({ hasGoogleReviews = false }) {
+export default function Editor({ hasGoogleReviews = false, role }) {
   const iframeRef = useRef(null);
   const contentRef = useRef(null);
   const savedContentRef = useRef(null);
@@ -371,11 +372,23 @@ export default function Editor({ hasGoogleReviews = false }) {
           >
             Visitors
           </button>
+          {role === "dreamrise_dev" && (
+            <button
+              type="button"
+              className={`admin-tab${activeTab === "sites" ? " admin-tab--active" : ""}`}
+              onClick={() => setActiveTab("sites")}
+            >
+              All Sites
+            </button>
+          )}
         </div>
         <div style={{ display: activeTab === "leads" ? "block" : "none" }}><LeadsTab /></div>
         <div style={{ display: activeTab === "visitors" ? "block" : "none" }}><VisitorsTab /></div>
-        {activeTab === "content" && (
-        <><div className="admin-save-bar">
+        {role === "dreamrise_dev" && (
+          <div style={{ display: activeTab === "sites" ? "block" : "none" }}><SitesTab /></div>
+        )}
+        <div style={{ display: activeTab === "content" ? "block" : "none" }}>
+        <div className="admin-save-bar">
           <div className="admin-save-bar__actions">
             <button
               type="button"
@@ -1152,7 +1165,7 @@ export default function Editor({ hasGoogleReviews = false }) {
             </div>
           ))}
         </Section>
-        </>)}
+        </div>
       </aside>
 
       {/* ── RIGHT PREVIEW ────────────────────────────────── */}

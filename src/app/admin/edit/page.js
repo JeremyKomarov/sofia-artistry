@@ -11,7 +11,8 @@ export const metadata = {
 export default async function EditPage() {
   const cookieStore = await cookies();
   const session = cookieStore.get('admin_session');
-  if (!verifySessionToken(session?.value)) redirect('/admin');
+  const user = verifySessionToken(session?.value);
+  if (!user) redirect('/admin');
   const hasGoogleReviews = !!(process.env.GOOGLE_PLACES_API_KEY && process.env.GOOGLE_PLACE_ID);
-  return <Editor hasGoogleReviews={hasGoogleReviews} />;
+  return <Editor hasGoogleReviews={hasGoogleReviews} role={user.role} />;
 }
