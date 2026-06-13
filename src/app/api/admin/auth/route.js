@@ -13,7 +13,13 @@ export async function POST(request) {
   if (!email || !password) {
     return Response.json({ ok: false, error: 'Invalid credentials' }, { status: 401 });
   }
-  const user = await verifyCredentials(email, password);
+  let user;
+  try {
+    user = await verifyCredentials(email, password);
+  } catch (err) {
+    console.error('Auth error:', err);
+    return Response.json({ ok: false, error: 'Service unavailable — try again shortly' }, { status: 503 });
+  }
   if (!user) {
     return Response.json({ ok: false, error: 'Invalid credentials' }, { status: 401 });
   }
