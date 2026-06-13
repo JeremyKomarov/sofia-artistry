@@ -13,8 +13,12 @@ export async function GET() {
     return Response.json({ ok: false }, { status: 401 });
   }
   const db = await getDb();
+  const site = await db.collection('websites').findOne({ slug: PROJECT }, { projection: { _id: 1 } });
+  const query = site
+    ? { $or: [{ websiteId: site._id }, { project: PROJECT }] }
+    : { project: PROJECT };
   const leads = await db.collection('leads')
-    .find({ project: PROJECT })
+    .find(query)
     .sort({ createdAt: -1 })
     .limit(200)
     .toArray();

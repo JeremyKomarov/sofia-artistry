@@ -1,5 +1,6 @@
 'use strict';
 import { createHash, createHmac, timingSafeEqual } from 'crypto';
+import { ObjectId } from 'mongodb';
 import bcrypt from 'bcryptjs';
 import { getDb } from './mongo.js';
 
@@ -22,12 +23,22 @@ export async function verifyCredentials(email, password) {
   const ok = await bcrypt.compare(password, user.passwordHash);
   if (!ok) return null;
   await db.collection('users').updateOne({ _id: user._id }, { $set: { lastLogin: new Date() } });
-  return { id: user._id.toString(), role: user.role, projects: user.projects || [] };
+
+  let websiteSlug = null;
+  if (user.role === 'company_admin' && user.websiteId) {
+    const site = await db.collection('websites').findOne(
+      { _id: new ObjectId(user.websiteId) },
+      { projection: { slug: 1 } }
+    );
+    websiteSlug = site?.slug ?? null;
+  }
+
+  return { id: user._id.toString(), role: user.role, websiteSlug };
 }
 
 export function hasProjectAccess(userPayload, projectSlug) {
   if (userPayload.role === 'dreamrise_dev') return true;
-  return (userPayload.projects || []).includes(projectSlug);
+  return userPayload.websiteSlug === projectSlug;
 }
 
 function _sign(payload) {
@@ -35,9 +46,12 @@ function _sign(payload) {
     .update(payload).digest('base64url');
 }
 
+// Token format: ts|userId|role|websiteSlug|sig
+// websiteSlug is empty string for dreamrise_dev
 export function createSessionToken(user) {
   const ts = Date.now().toString(36);
-  const payload = `${ts}|${user.id}|${user.role}`;
+  const slug = user.websiteSlug || '';
+  const payload = `${ts}|${user.id}|${user.role}|${slug}`;
   return `${payload}|${_sign(payload)}`;
 }
 
@@ -51,10 +65,10 @@ export function verifySessionToken(token) {
   const ha = createHash('sha256').update(sig).digest();
   const hb = createHash('sha256').update(expected).digest();
   if (!timingSafeEqual(ha, hb)) return null;
-  const [ts, userId, role] = payload.split('|');
+  const [ts, userId, role, websiteSlug] = payload.split('|');
   const ageMs = Date.now() - parseInt(ts, 36);
   if (ageMs < 0 || ageMs >= 86_400_000) return null;
-  return { userId, role };
+  return { userId, role, websiteSlug: websiteSlug || null };
 }
 
 export function csrfOk(request) {

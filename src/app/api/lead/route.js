@@ -35,8 +35,11 @@ export async function POST(request) {
 
   // Dual-write: save to DB + send email notification
   const db = await getDb();
+  const slug = process.env.NEXT_PUBLIC_PROJECT_SLUG || 'sofia-artistry';
+  const site = await db.collection('websites').findOne({ slug }, { projection: { _id: 1 } });
   await db.collection('leads').insertOne({
-    project: process.env.NEXT_PUBLIC_PROJECT_SLUG || 'sofia-artistry',
+    websiteId: site?._id ?? null,
+    project: slug,
     name: name.trim(),
     phone: phone.trim(),
     email: email?.trim() || null,
