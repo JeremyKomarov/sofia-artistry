@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from "react";
 import FieldRow from "./FieldRow";
 import ArrayEditor from "./ArrayEditor";
 import HrefField from "./HrefField";
+import LeadsTab from "./LeadsTab";
+import VisitorsTab from "./VisitorsTab";
 
 function setNestedValue(obj, path, value) {
   const segments = path.replace(/\[(\d+)\]/g, ".$1").split(".");
@@ -158,6 +160,7 @@ export default function Editor({ hasGoogleReviews = false }) {
   const [syncError, setSyncError] = useState("");
   const [viewport, setViewport] = useState("desktop");
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [activeTab, setActiveTab] = useState("content");
 
   function applyContent(data) {
     contentRef.current = data;
@@ -346,7 +349,35 @@ export default function Editor({ hasGoogleReviews = false }) {
     <div className={`admin-split${sidebarOpen ? "" : " admin-split--collapsed"}`}>
       {/* ── LEFT SIDEBAR ─────────────────────────────────── */}
       <aside className="admin-split__sidebar">
-        <div className="admin-save-bar">
+        <div className="admin-tabs">
+          <button
+            type="button"
+            className={`admin-tab${activeTab === "content" ? " admin-tab--active" : ""}`}
+            onClick={() => setActiveTab("content")}
+          >
+            Content
+          </button>
+          <button
+            type="button"
+            className={`admin-tab${activeTab === "leads" ? " admin-tab--active" : ""}`}
+            onClick={() => setActiveTab("leads")}
+          >
+            Leads
+          </button>
+          <button
+            type="button"
+            className={`admin-tab${activeTab === "visitors" ? " admin-tab--active" : ""}`}
+            onClick={() => setActiveTab("visitors")}
+          >
+            Visitors
+          </button>
+        </div>
+        {activeTab === "leads" ? (
+          <LeadsTab />
+        ) : activeTab === "visitors" ? (
+          <VisitorsTab />
+        ) : (
+        <><div className="admin-save-bar">
           <div className="admin-save-bar__actions">
             <button
               type="button"
@@ -1123,7 +1154,7 @@ export default function Editor({ hasGoogleReviews = false }) {
             </div>
           ))}
         </Section>
-
+        </>)}
       </aside>
 
       {/* ── RIGHT PREVIEW ────────────────────────────────── */}

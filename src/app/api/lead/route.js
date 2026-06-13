@@ -1,6 +1,7 @@
 'use strict';
 
 import { Resend } from 'resend';
+import { getDb } from '@/lib/mongo';
 
 const TO_EMAIL = process.env.LEAD_TO_EMAIL || 'hello@sofiaartistry.com';
 
@@ -32,9 +33,23 @@ export async function POST(request) {
     return Response.json({ ok: false, error: 'Invalid phone number' }, { status: 400 });
   }
 
+  // Dual-write: save to DB + send email notification
+  const db = await getDb();
+  await db.collection('leads').insertOne({
+    project: process.env.NEXT_PUBLIC_PROJECT_SLUG || 'sofia-artistry',
+    name: name.trim(),
+    phone: phone.trim(),
+    email: email?.trim() || null,
+    service: service || null,
+    date: date || null,
+    message: message?.trim() || null,
+    source: 'form',
+    createdAt: new Date(),
+  });
+
   const resend = new Resend(process.env.RESEND_API_KEY);
   await resend.emails.send({
-    from: 'Sofia Artistry <leads@sofiaartistry.com>',
+    from: 'Sofia Artistry <onboarding@resend.dev>',
     to: TO_EMAIL,
     replyTo: email || undefined,
     subject: `New inquiry: ${name.trim()} — ${phone.trim()}`,

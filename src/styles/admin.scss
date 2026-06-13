@@ -693,3 +693,329 @@
     color: $rose;
   }
 }
+
+// ── ADMIN TABS ────────────────────────────────────────────────────────
+.admin-tabs {
+  display: flex;
+  border-bottom: 1px solid $border;
+  background: $white;
+  flex-shrink: 0;
+  margin-top: 16px;
+}
+
+.admin-tab {
+  flex: 1;
+  padding: 12px 0;
+  font-size: 13px;
+  font-weight: 500;
+  color: $ink-muted;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+  transition: color 0.15s, border-color 0.15s;
+
+  &:hover { color: $ink; }
+
+  &--active {
+    color: $rose;
+    border-bottom-color: $rose;
+  }
+}
+
+// ── LEADS TAB ─────────────────────────────────────────────────────────
+.leads-tab {
+  padding: 16px;
+  overflow-y: auto;
+
+  &__count {
+    font-size: 12px;
+    color: $ink-muted;
+    margin-bottom: 12px;
+  }
+
+  &__table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+
+    th, td {
+      text-align: left;
+      padding: 8px 10px;
+      border-bottom: 1px solid $border;
+    }
+
+    th {
+      font-weight: 600;
+      color: $gold;
+      background: $cream;
+      position: sticky;
+      top: 0;
+    }
+
+    tr:hover td { background: color.adjust($cream, $lightness: -2%); }
+  }
+
+  &__msg {
+    max-width: 160px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  &__error, &__empty, &__loading {
+    padding: 24px 16px;
+    color: $ink-muted;
+    font-size: 13px;
+  }
+}
+
+// ── VISITORS TAB ─────────────────────────────────────────────────────
+.vt {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+// Filter bar
+.vt-filters {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px 14px;
+  border-bottom: 1px solid $border;
+  background: $white;
+  flex-shrink: 0;
+
+  &__row {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+
+    &--between {
+      justify-content: space-between;
+    }
+  }
+}
+
+.vt-select {
+  font-size: 11px;
+  padding: 4px 7px;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  background: $cream;
+  color: $ink;
+  cursor: pointer;
+  flex: 1;
+
+  &:focus { outline: none; border-color: $rose; }
+  &--grow { flex: 1; }
+  &--accent { color: $rose; font-weight: 600; flex: none; }
+}
+
+.vt-count {
+  font-size: 11px;
+  color: $ink-muted;
+
+  em { font-style: normal; color: color.adjust($ink-muted, $lightness: 10%); }
+}
+
+// Grouped table
+.vt-scroll {
+  overflow-y: auto;
+  flex: 1;
+  padding: 0 14px 14px;
+}
+
+.vt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 8px;
+
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid $border;
+  }
+
+  th {
+    font-weight: 600;
+    color: $gold;
+    background: $cream;
+    position: sticky;
+    top: 0;
+  }
+
+  tr:hover td { background: color.adjust($cream, $lightness: -2%); }
+}
+
+// Session cards
+.vt-cards {
+  list-style: none;
+  padding: 10px 12px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.vt-card {
+  border: 1px solid $border;
+  border-radius: $radius;
+  background: $white;
+  overflow: hidden;
+  transition: border-color 0.15s;
+
+  &:hover { border-color: color.adjust($border, $lightness: -8%); }
+  &--open { border-color: $rose; }
+
+  &__main {
+    padding: 10px 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  &__date {
+    font-size: 12px;
+    font-weight: 500;
+    color: $ink;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: $ink-muted;
+  }
+
+  &__dur {
+    font-weight: 600;
+    color: $ink;
+    padding-left: 4px;
+    border-left: 1px solid $border;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+
+  &__tag {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 99px;
+
+    &--source {
+      background: color.adjust($gold, $lightness: 38%);
+      color: color.adjust($gold, $lightness: -20%);
+    }
+
+    &--section {
+      background: color.adjust($rose, $lightness: 30%);
+      color: $rose;
+    }
+  }
+
+  &__expand {
+    margin-left: auto;
+    font-size: 10px;
+    color: $ink-muted;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+
+    &:hover { color: $rose; }
+    &--open { color: $rose; }
+  }
+}
+
+// Click trail
+.vt-clicks {
+  list-style: none;
+  padding: 0 12px 10px;
+  margin: 0;
+  border-top: 1px dashed $border;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  background: $cream;
+
+  &__item {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding-top: 6px;
+    font-size: 11px;
+  }
+
+  &__section {
+    font-weight: 600;
+    color: $rose;
+    min-width: 56px;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    color: $ink;
+    flex: 1;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__ts {
+    color: $ink-muted;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+}
+
+// Pagination
+.vt-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid $border;
+  flex-shrink: 0;
+  background: $white;
+}
+
+.vt-page-btn {
+  font-size: 11px;
+  padding: 4px 10px;
+  border: 1px solid $border;
+  border-radius: $radius-sm;
+  background: $cream;
+  color: $ink;
+  cursor: pointer;
+
+  &:hover:not(:disabled) { border-color: $rose; color: $rose; }
+  &:disabled { opacity: 0.3; cursor: default; }
+}
+
+.vt-page-info {
+  font-size: 11px;
+  color: $ink-muted;
+  min-width: 40px;
+  text-align: center;
+}

@@ -15,10 +15,12 @@ import RevealObserver from '@/components/RevealObserver/RevealObserver';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import StickyCta from '@/components/StickyCta/StickyCta';
 import SectionGate from '@/components/SectionGate/SectionGate';
+import SessionTracker from '@/components/SessionTracker/SessionTracker';
 
 export default function Home() {
   return (
     <ContentProvider>
+      <SessionTracker />
       <JsonLd />
       <Header />
       <main>

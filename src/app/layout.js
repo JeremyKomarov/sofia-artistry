@@ -41,6 +41,7 @@ export const metadata = {
     images: ['/og.jpg'],
   },
   robots: { index: true, follow: true },
+  verification: { google: 'lTY3AnTkp83MzQahvap3kmXsRNMukULB5Jnvad1ntYo' },
 };
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;

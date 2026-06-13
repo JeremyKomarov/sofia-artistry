@@ -1,10 +1,10 @@
 'use client';
-
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 export default function LoginForm() {
   const router = useRouter();
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -16,13 +16,13 @@ export default function LoginForm() {
     const res = await fetch('/api/admin/auth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password }),
+      body: JSON.stringify({ email, password }),
     });
     if (res.ok) {
       router.push('/admin/edit');
     } else {
       const data = await res.json();
-      setError(data.error || 'Invalid password');
+      setError(data.error || 'Invalid credentials');
       setLoading(false);
     }
   }
@@ -31,8 +31,19 @@ export default function LoginForm() {
     <div className="admin-login">
       <div className="admin-login__card">
         <p className="admin-login__heading">Sofia Artistry</p>
-        <p className="admin-login__sub">Admin Panel — enter your password to continue</p>
+        <p className="admin-login__sub">Admin Panel — sign in to continue</p>
         <form onSubmit={handleSubmit}>
+          <div className="admin-field">
+            <label className="admin-field__label" htmlFor="admin-email">Email</label>
+            <input
+              id="admin-email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              autoComplete="email"
+              required
+            />
+          </div>
           <div className="admin-field">
             <label className="admin-field__label" htmlFor="admin-pw">Password</label>
             <input
