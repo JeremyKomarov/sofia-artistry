@@ -10,13 +10,36 @@ function trackLead() {
   if (window.fbq) window.fbq('track', 'Lead');
 }
 
+const PHONE_RE = /^[\d\s()+-]{7,}$/;
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function validate(data) {
+  const errors = {};
+  if (!data.name?.trim() || data.name.trim().length < 2)
+    errors.name = 'Please enter your full name.';
+  if (!data.phone?.trim())
+    errors.phone = 'Phone number is required.';
+  else if (!PHONE_RE.test(data.phone.trim()))
+    errors.phone = 'Please enter a valid phone number.';
+  if (data.email?.trim() && !EMAIL_RE.test(data.email.trim()))
+    errors.email = 'Please enter a valid email address.';
+  return errors;
+}
+
 export default function LeadForm() {
   const [status, setStatus] = useState('idle'); // idle | submitting | success | error
-
+  const [errors, setErrors] = useState({});
   async function handleSubmit(e) {
     e.preventDefault();
-    setStatus('submitting');
     const data = Object.fromEntries(new FormData(e.target));
+
+    const fieldErrors = validate(data);
+    if (Object.keys(fieldErrors).length > 0) {
+      setErrors(fieldErrors);
+      return;
+    }
+    setErrors({});
+    setStatus('submitting');
 
     try {
       const res = await fetch('/api/lead', {
@@ -53,17 +76,32 @@ export default function LeadForm() {
       <div className={styles.grid}>
         <div className={styles.field}>
           <label htmlFor="f-name">Your name</label>
-          <input id="f-name" name="name" type="text" autoComplete="name" placeholder="Jane Smith" required />
+          <input
+            id="f-name" name="name" type="text" autoComplete="name" placeholder="Jane Smith" required
+            className={errors.name ? styles.inputError : ''}
+            onChange={() => errors.name && setErrors((e) => ({ ...e, name: '' }))}
+          />
+          {errors.name && <span className={styles.fieldError}>{errors.name}</span>}
         </div>
 
         <div className={styles.field}>
           <label htmlFor="f-phone">Phone number</label>
-          <input id="f-phone" name="phone" type="tel" autoComplete="tel" placeholder="(310) 555-0100" required />
+          <input
+            id="f-phone" name="phone" type="tel" autoComplete="tel" placeholder="(310) 555-0100" required
+            className={errors.phone ? styles.inputError : ''}
+            onChange={() => errors.phone && setErrors((e) => ({ ...e, phone: '' }))}
+          />
+          {errors.phone && <span className={styles.fieldError}>{errors.phone}</span>}
         </div>
 
         <div className={`${styles.field} ${styles.full}`}>
           <label htmlFor="f-email">Email address</label>
-          <input id="f-email" name="email" type="email" autoComplete="email" placeholder="jane@email.com" />
+          <input
+            id="f-email" name="email" type="email" autoComplete="email" placeholder="jane@email.com"
+            className={errors.email ? styles.inputError : ''}
+            onChange={() => errors.email && setErrors((e) => ({ ...e, email: '' }))}
+          />
+          {errors.email && <span className={styles.fieldError}>{errors.email}</span>}
         </div>
 
         <div className={styles.field}>

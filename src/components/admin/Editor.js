@@ -372,11 +372,9 @@ export default function Editor({ hasGoogleReviews = false }) {
             Visitors
           </button>
         </div>
-        {activeTab === "leads" ? (
-          <LeadsTab />
-        ) : activeTab === "visitors" ? (
-          <VisitorsTab />
-        ) : (
+        <div style={{ display: activeTab === "leads" ? "block" : "none" }}><LeadsTab /></div>
+        <div style={{ display: activeTab === "visitors" ? "block" : "none" }}><VisitorsTab /></div>
+        {activeTab === "content" && (
         <><div className="admin-save-bar">
           <div className="admin-save-bar__actions">
             <button
