@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import { useDraft } from '@/contexts/ContentContext';
-import { SITE, NAV_LINKS } from '@/constants/site';
+import { SITE, NAV_LINKS, SECTIONS } from '@/constants/site';
 import styles from './Header.module.scss';
 
 export default function Header() {
   const site = useDraft('SITE', SITE);
+  const sections = useDraft('SECTIONS', SECTIONS);
+  const links = NAV_LINKS.filter((link) => sections[link.href.slice(1)] !== false);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -27,7 +29,7 @@ export default function Header() {
         </a>
 
         <ul className={`${styles.links} ${open ? styles.linksOpen : ''}`} role="list">
-          {NAV_LINKS.map((link) => (
+          {links.map((link) => (
             <li key={link.href}>
               <a href={link.href} onClick={close}>{link.label}</a>
             </li>

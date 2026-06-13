@@ -1,6 +1,11 @@
 @use '../../styles/variables' as *;
 @use '../../styles/mixins' as *;
 
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(18px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
 .nav {
   position: fixed;
   right: 24px;
@@ -10,8 +15,14 @@
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  gap: 10px;
-  transition: width 200ms ease, height 200ms ease, border-radius 200ms ease, opacity 200ms ease;
+  gap: 12px;
+  transition:
+    width     320ms cubic-bezier(0.22, 1, 0.36, 1),
+    height    320ms cubic-bezier(0.22, 1, 0.36, 1),
+    border-radius 320ms cubic-bezier(0.22, 1, 0.36, 1),
+    opacity   200ms ease,
+    box-shadow 200ms ease,
+    background 200ms ease;
 
   @include respond-max(lg) { display: none; }
 
@@ -25,7 +36,7 @@
     gap: 0;
     align-items: center;
     justify-content: center;
-    opacity: 0.4;
+    opacity: 0.35;
     cursor: pointer;
     overflow: hidden;
 
@@ -33,6 +44,7 @@
   }
 }
 
+// ── Open trigger ──────────────────────────────────────────────────────
 .toggle {
   display: none;
   width: 100%;
@@ -42,13 +54,42 @@
   background: none;
   border: none;
   cursor: pointer;
-  color: $ink-muted;
-  font-size: 12px;
+  color: $ink-soft;
   padding: 0;
 
   .collapsed & { display: flex; }
 }
 
+// ── Close button ──────────────────────────────────────────────────────
+.close {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0;
+  opacity: 0.45;
+  transition: opacity 160ms ease, background 160ms ease, border-color 160ms ease, transform 160ms ease;
+
+  &:hover {
+    opacity: 1;
+    background: rgba(0, 0, 0, 0.38);
+    border-color: rgba(255, 255, 255, 0.5);
+    transform: scale(1.15);
+  }
+
+  .collapsed & { display: none; }
+
+  .nav:not(.collapsed) & {
+    animation: slideInRight 350ms 50ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+// ── Dot list ──────────────────────────────────────────────────────────
 .dots {
   display: flex;
   flex-direction: column;
@@ -57,13 +98,26 @@
   .collapsed & { display: none; }
 }
 
+// Staggered entrance for each dot
+.nav:not(.collapsed) .dot {
+  animation: slideInRight 360ms cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  &:nth-child(1) { animation-delay:  90ms; }
+  &:nth-child(2) { animation-delay: 120ms; }
+  &:nth-child(3) { animation-delay: 150ms; }
+  &:nth-child(4) { animation-delay: 180ms; }
+  &:nth-child(5) { animation-delay: 210ms; }
+  &:nth-child(6) { animation-delay: 240ms; }
+  &:nth-child(7) { animation-delay: 270ms; }
+  &:nth-child(8) { animation-delay: 300ms; }
+}
+
 .dot {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   gap: 8px;
   text-decoration: none;
-  transition: opacity 200ms;
   cursor: pointer;
 }
 

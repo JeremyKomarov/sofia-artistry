@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { verifySessionToken } from '@/lib/admin-auth';
 import LoginForm from '@/components/admin/LoginForm';
 
 export const metadata = {
@@ -10,8 +11,6 @@ export const metadata = {
 export default async function AdminPage() {
   const cookieStore = await cookies();
   const session = cookieStore.get('admin_session');
-  if (session?.value && session.value === process.env.ADMIN_PASSWORD) {
-    redirect('/admin/edit');
-  }
+  if (verifySessionToken(session?.value)) redirect('/admin/edit');
   return <LoginForm />;
 }

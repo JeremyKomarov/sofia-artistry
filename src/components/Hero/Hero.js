@@ -1,5 +1,6 @@
 'use client';
 
+import { Fragment } from 'react';
 import { useDraft } from '@/contexts/ContentContext';
 import { HERO } from '@/constants/site';
 import styles from './Hero.module.scss';
@@ -35,10 +36,10 @@ export default function Hero() {
 
         <div className={styles.proof} aria-label="Social proof">
           {hero.proof.map((item, i) => (
-            <>
-              {i > 0 && <span key={`div-${i}`} className={styles.divider} aria-hidden="true" />}
-              <span key={i}><strong>{item.value}</strong> {item.label}</span>
-            </>
+            <Fragment key={i}>
+              {i > 0 && <span className={styles.divider} aria-hidden="true" />}
+              <span><strong>{item.value}</strong> {item.label}</span>
+            </Fragment>
           ))}
         </div>
       </div>

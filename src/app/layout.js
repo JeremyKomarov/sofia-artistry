@@ -33,6 +33,13 @@ export const metadata = {
     locale: 'en_US',
     type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Makeup Artist in Los Angeles | Sofia Artistry',
+    description:
+      'Professional bridal, glam & editorial makeup artist. 5.0 Google rating. Mobile artist serving all of Los Angeles County.',
+    images: ['/og.jpg'],
+  },
   robots: { index: true, follow: true },
 };
 
@@ -72,6 +79,7 @@ export default function RootLayout({ children }) {
               fbq('track', 'PageView');
             `}</Script>
             <noscript>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 height="1"
                 width="1"

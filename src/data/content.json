@@ -1,15 +1,17 @@
 {
   "SITE": {
-    "name": "Sofia Artistry HELLO",
+    "name": "Sofia Artistry",
     "tagline": "Makeup Artist · Los Angeles",
-    "phone": "+1 (310) 555-0192yyy",
+    "phone": "+1 (310) 555-0192",
     "phoneHref": "tel:+13105550192",
     "email": "hello@sofiaartistry.com",
-    "city": "Los Angele",
+    "city": "Los Angeles",
     "serviceArea": "Los Angeles County",
     "instagram": "https://instagram.com/sofiaartistry",
     "tiktok": "https://tiktok.com/@sofiaartistry",
     "pinterest": "https://pinterest.com/sofiaartistry",
+    "facebook": "",
+    "youtube": "",
     "hours": "Mon–Sat, 8am–8pm"
   },
   "HERO": {
@@ -231,5 +233,76 @@
       "Serving all of Los Angeles County",
       "Mobile — I come to you"
     ]
+  },
+  "FOOTER": {
+    "brandLine": "Makeup Artist",
+    "cols": [
+      {
+        "heading": "Services",
+        "links": [
+          {
+            "label": "Bridal Makeup",
+            "href": "#services"
+          },
+          {
+            "label": "Glam & Events",
+            "href": "#services"
+          },
+          {
+            "label": "Editorial",
+            "href": "#services"
+          }
+        ]
+      },
+      {
+        "heading": "Studio",
+        "links": [
+          {
+            "label": "About Sofia",
+            "href": "#about"
+          },
+          {
+            "label": "Portfolio",
+            "href": "#gallery"
+          },
+          {
+            "label": "Reviews",
+            "href": "#reviews"
+          },
+          {
+            "label": "FAQ",
+            "href": "#faq"
+          }
+        ]
+      },
+      {
+        "heading": "Book",
+        "links": [
+          {
+            "label": "Book a Session",
+            "href": "#lead-form"
+          },
+          {
+            "label": "Call Sofia",
+            "href": "tel:+13105550192"
+          },
+          {
+            "label": "Instagram DM",
+            "href": "https://instagram.com/sofiaartistry",
+            "external": true
+          }
+        ]
+      }
+    ]
+  },
+  "SECTIONS": {
+    "trust": true,
+    "services": true,
+    "gallery": true,
+    "reviews": true,
+    "about": true,
+    "process": true,
+    "faq": true,
+    "finalCta": true
   }
 }

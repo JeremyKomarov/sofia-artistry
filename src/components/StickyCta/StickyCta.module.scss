@@ -23,5 +23,19 @@
 
 .btn {
   flex: 1;
+  // Allow shrinking below the nowrap text width so long labels
+  // never push the buttons off-screen.
+  min-width: 0;
+  overflow: hidden;
   justify-content: center;
+  padding-left: 14px;
+  padding-right: 14px;
+  font-size: 13px;
+}
+
+.label {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

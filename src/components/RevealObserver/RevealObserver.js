@@ -20,18 +20,28 @@ export default function RevealObserver() {
       { threshold: 0, rootMargin: '0px 0px -40px 0px' },
     );
 
-    const els = document.querySelectorAll('.reveal');
-    els.forEach((el) => {
+    const attach = (el) => {
       const r = el.getBoundingClientRect();
       if (r.top < window.innerHeight && r.bottom > 0) {
-        // Already visible on load — reveal immediately
+        // Already in viewport — reveal immediately
         reveal(el);
       } else {
         obs.observe(el);
       }
-    });
+    };
 
-    return () => obs.disconnect();
+    document.querySelectorAll('.reveal').forEach(attach);
+
+    // Watch for sections (re)mounted later, e.g. toggled visible in admin
+    const mo = new MutationObserver(() => {
+      document.querySelectorAll('.reveal:not(.in-view)').forEach(attach);
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    return () => {
+      obs.disconnect();
+      mo.disconnect();
+    };
   }, []);
 
   return null;

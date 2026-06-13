@@ -1,12 +1,20 @@
 'use client';
 
 import { useDraft } from '@/contexts/ContentContext';
-import { SITE, FOOTER_LINKS } from '@/constants/site';
+import { SITE, FOOTER } from '@/constants/site';
+import { SOCIALS } from './socials';
 import styles from './Footer.module.scss';
+
+const BAD_HREF = /^(javascript|data|vbscript):/i;
+function safeHref(href) {
+  return (!href || BAD_HREF.test(String(href).trim())) ? '#' : href;
+}
 
 export default function Footer() {
   const site = useDraft('SITE', SITE);
+  const footer = useDraft('FOOTER', FOOTER);
   const year = new Date().getFullYear();
+  const socials = SOCIALS.filter(({ key }) => site[key]);
 
   return (
     <footer className={styles.footer} aria-label="Site footer">
@@ -15,49 +23,41 @@ export default function Footer() {
           <div className={styles.brand}>
             <div className={styles.logo}>
               {site.name}
-              <span>Makeup Artist</span>
+              <span>{footer.brandLine}</span>
             </div>
             <address className={styles.nap}>
               Available throughout {site.serviceArea}<br />
-              <a href={site.phoneHref}>{site.phone}</a><br />
-              <a href={`mailto:${site.email}`}>{site.email}</a><br />
+              <a href={safeHref(site.phoneHref)}>{site.phone}</a><br />
+              <a href={safeHref(`mailto:${site.email}`)}>{site.email}</a><br />
               {site.hours}
             </address>
-            <div className={styles.social} aria-label="Social media">
-              <a href={site.instagram} rel="noopener" target="_blank" aria-label="Instagram">IG</a>
-              <a href={site.tiktok} rel="noopener" target="_blank" aria-label="TikTok">TK</a>
-              <a href={site.pinterest} rel="noopener" target="_blank" aria-label="Pinterest">PT</a>
+            {socials.length > 0 && (
+              <div className={styles.social} aria-label="Social media">
+                {socials.map(({ key, label, path }) => (
+                  <a key={key} href={safeHref(site[key])} rel="noopener noreferrer" target="_blank" aria-label={label}>
+                    <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                      <path d={path} />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {footer.cols.map((col) => (
+            <div key={col.heading} className={styles.col}>
+              <h4>{col.heading}</h4>
+              <ul className={styles.links}>
+                {col.links.map((l) => (
+                  <li key={l.label}>
+                    <a href={safeHref(l.href)} {...(l.external ? { rel: 'noopener noreferrer', target: '_blank' } : {})}>
+                      {l.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
             </div>
-          </div>
-
-          <div className={styles.col}>
-            <h4>Services</h4>
-            <ul className={styles.links}>
-              {FOOTER_LINKS.services.map((l) => (
-                <li key={l.label}><a href={l.href}>{l.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className={styles.col}>
-            <h4>Studio</h4>
-            <ul className={styles.links}>
-              {FOOTER_LINKS.studio.map((l) => (
-                <li key={l.label}><a href={l.href}>{l.label}</a></li>
-              ))}
-            </ul>
-          </div>
-
-          <div className={styles.col}>
-            <h4>Book</h4>
-            <ul className={styles.links}>
-              {FOOTER_LINKS.book.map((l) => (
-                <li key={l.label}>
-                  <a href={l.href} {...(l.external ? { rel: 'noopener', target: '_blank' } : {})}>{l.label}</a>
-                </li>
-              ))}
-            </ul>
-          </div>
+          ))}
         </div>
 
         <div className={styles.bottom}>

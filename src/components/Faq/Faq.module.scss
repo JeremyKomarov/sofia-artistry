@@ -3,6 +3,11 @@
 
 .section {
   background: $cream;
+  // Anchor content to the top so opening an answer expands downward
+  // instead of re-centering and shifting the list up. Extra top padding
+  // keeps the block visually balanced within the full-height section.
+  justify-content: flex-start;
+  padding-top: calc(#{$nav-height} + clamp(48px, 12vh, 140px));
 }
 
 .list {

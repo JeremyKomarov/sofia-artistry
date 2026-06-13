@@ -7,10 +7,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-bottom: clamp(20px, 3vh, 48px);
   position: relative;
   overflow: hidden;
-  scroll-snap-align: start;
 }
 
 .bg {
@@ -81,6 +79,17 @@
   flex-wrap: wrap;
   margin-bottom: 48px;
   animation: hero-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both 0.75s;
+
+  // Stacked on small screens — equal width, centered
+  @include respond-max(md) {
+    flex-direction: column;
+    align-items: center;
+
+    a {
+      width: min(100%, 300px);
+      justify-content: center;
+    }
+  }
 }
 
 .proof {

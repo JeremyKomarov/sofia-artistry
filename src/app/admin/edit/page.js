@@ -1,5 +1,6 @@
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { verifySessionToken } from '@/lib/admin-auth';
 import Editor from '@/components/admin/Editor';
 
 export const metadata = {
@@ -10,8 +11,7 @@ export const metadata = {
 export default async function EditPage() {
   const cookieStore = await cookies();
   const session = cookieStore.get('admin_session');
-  if (!session?.value || session.value !== process.env.ADMIN_PASSWORD) {
-    redirect('/admin');
-  }
-  return <Editor />;
+  if (!verifySessionToken(session?.value)) redirect('/admin');
+  const hasGoogleReviews = !!(process.env.GOOGLE_PLACES_API_KEY && process.env.GOOGLE_PLACE_ID);
+  return <Editor hasGoogleReviews={hasGoogleReviews} />;
 }

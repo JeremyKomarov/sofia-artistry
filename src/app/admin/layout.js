@@ -1,4 +1,5 @@
 import '../../styles/admin.scss';
+import AdminTopbarActions from '@/components/admin/AdminTopbarActions';
 
 export const metadata = {
   title: 'Admin — Sofia Artistry',
@@ -12,6 +13,7 @@ export default function AdminLayout({ children }) {
         <span className="admin-topbar__brand">
           Sofia Artistry <em>Admin</em>
         </span>
+        <AdminTopbarActions />
       </header>
       <main className="admin-main">{children}</main>
     </div>

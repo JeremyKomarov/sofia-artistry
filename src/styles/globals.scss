@@ -45,7 +45,6 @@
 
 html {
   scroll-behavior: smooth;
-  scroll-snap-type: y proximity;
 }
 
 body {
@@ -83,14 +82,9 @@ section {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  scroll-snap-align: start;
-  // Reserve space for the fixed nav so content always clears it
-  padding-top: $nav-height;
-
-  & > .container {
-    padding-top: clamp(6px, 1.2vh, 20px);
-    padding-bottom: clamp(6px, 1.2vh, 20px);
-  }
+  // Clear the fixed nav on top, equal breathing room top and bottom
+  padding-top: calc(#{$nav-height} + clamp(28px, 4vh, 64px));
+  padding-bottom: clamp(28px, 4vh, 64px);
 }
 
 .container {

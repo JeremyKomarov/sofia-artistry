@@ -14,6 +14,7 @@ import SectionNav from '@/components/SectionNav/SectionNav';
 import RevealObserver from '@/components/RevealObserver/RevealObserver';
 import JsonLd from '@/components/JsonLd/JsonLd';
 import StickyCta from '@/components/StickyCta/StickyCta';
+import SectionGate from '@/components/SectionGate/SectionGate';
 
 export default function Home() {
   return (
@@ -22,14 +23,14 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <TrustBar />
-        <Services />
-        <Gallery />
-        <Reviews />
-        <About />
-        <Process />
-        <Faq />
-        <FinalCta />
+        <SectionGate section="trust"><TrustBar /></SectionGate>
+        <SectionGate section="services"><Services /></SectionGate>
+        <SectionGate section="gallery"><Gallery /></SectionGate>
+        <SectionGate section="reviews"><Reviews /></SectionGate>
+        <SectionGate section="about"><About /></SectionGate>
+        <SectionGate section="process"><Process /></SectionGate>
+        <SectionGate section="faq"><Faq /></SectionGate>
+        <SectionGate section="finalCta"><FinalCta /></SectionGate>
       </main>
       <Footer />
       <SectionNav />
