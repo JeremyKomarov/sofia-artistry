@@ -169,7 +169,13 @@ export default function Editor({ hasGoogleReviews = false, role }) {
   }
 
   function writeDraft(data) {
-    localStorage.setItem("__preview_draft", JSON.stringify(data));
+    try { localStorage.setItem("__preview_draft", JSON.stringify(data)); } catch {}
+    try {
+      iframeRef.current?.contentWindow?.postMessage(
+        { type: '__preview_draft', data },
+        window.location.origin,
+      );
+    } catch {}
   }
 
   useEffect(() => {
@@ -333,6 +339,11 @@ export default function Editor({ hasGoogleReviews = false, role }) {
     return () => window.removeEventListener('beforeunload', onBeforeUnload);
   }, [dirty]);
 
+  // Re-send draft to iframe when switching back to Content tab (browsers throttle
+  // hidden-iframe JS, so storage events can be missed while the preview is hidden).
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => { if (activeTab === 'content') writeDraft(contentRef.current); }, [activeTab]);
+
   function toggle(id) {
     setOpen((prev) => (prev === id ? null : id));
   }
@@ -347,47 +358,9 @@ export default function Editor({ hasGoogleReviews = false, role }) {
   const c = content;
 
   return (
-    <div className={`admin-split${sidebarOpen ? "" : " admin-split--collapsed"}`}>
+    <div className={`admin-split${sidebarOpen ? "" : " admin-split--collapsed"}${activeTab !== "content" ? " admin-split--no-preview" : ""}`}>
       {/* ── LEFT SIDEBAR ─────────────────────────────────── */}
       <aside className="admin-split__sidebar">
-        <div className="admin-tabs">
-          <button
-            type="button"
-            className={`admin-tab${activeTab === "content" ? " admin-tab--active" : ""}`}
-            onClick={() => setActiveTab("content")}
-          >
-            Content
-          </button>
-          <button
-            type="button"
-            className={`admin-tab${activeTab === "leads" ? " admin-tab--active" : ""}`}
-            onClick={() => setActiveTab("leads")}
-          >
-            Leads
-          </button>
-          <button
-            type="button"
-            className={`admin-tab${activeTab === "visitors" ? " admin-tab--active" : ""}`}
-            onClick={() => setActiveTab("visitors")}
-          >
-            Visitors
-          </button>
-          {role === "dreamrise_dev" && (
-            <button
-              type="button"
-              className={`admin-tab${activeTab === "sites" ? " admin-tab--active" : ""}`}
-              onClick={() => setActiveTab("sites")}
-            >
-              All Sites
-            </button>
-          )}
-        </div>
-        <div style={{ display: activeTab === "leads" ? "block" : "none" }}><LeadsTab /></div>
-        <div style={{ display: activeTab === "visitors" ? "block" : "none" }}><VisitorsTab /></div>
-        {role === "dreamrise_dev" && (
-          <div style={{ display: activeTab === "sites" ? "block" : "none" }}><SitesTab /></div>
-        )}
-        <div style={{ display: activeTab === "content" ? "block" : "none" }}>
         <div className="admin-save-bar">
           <div className="admin-save-bar__actions">
             <button
@@ -408,58 +381,42 @@ export default function Editor({ hasGoogleReviews = false, role }) {
               Reset to Saved
             </button>
           </div>
-
           {status === "saved" && (
             <p className="admin-save-msg admin-save-msg--ok">
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                aria-hidden="true"
-              >
-                <path d="M20 6L9 17l-5-5" />
-              </svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M20 6L9 17l-5-5" /></svg>
               Published — live in ~60s
             </p>
           )}
           {status === "pristine" && (
             <p className="admin-save-msg admin-save-msg--info">
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                aria-hidden="true"
-              >
-                <circle cx="12" cy="12" r="10" />
-                <line x1="12" y1="8" x2="12" y2="12" />
-                <line x1="12" y1="16" x2="12.01" y2="16" />
-              </svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><circle cx="12" cy="12" r="10" /><line x1="12" y1="8" x2="12" y2="12" /><line x1="12" y1="16" x2="12.01" y2="16" /></svg>
               Nothing to publish — no changes made
             </p>
           )}
           {status === "error" && (
             <p className="admin-save-msg admin-save-msg--fail">
-              <svg
-                width="13"
-                height="13"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                aria-hidden="true"
-              >
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg>
               {error}
             </p>
           )}
         </div>
+
+        <div className="admin-tabs">
+          <button type="button" className={`admin-tab${activeTab === "content" ? " admin-tab--active" : ""}`} onClick={() => setActiveTab("content")}>Content</button>
+          <button type="button" className={`admin-tab${activeTab === "leads" ? " admin-tab--active" : ""}`} onClick={() => setActiveTab("leads")}>Leads</button>
+          <button type="button" className={`admin-tab${activeTab === "visitors" ? " admin-tab--active" : ""}`} onClick={() => setActiveTab("visitors")}>Visitors</button>
+          {role === "dreamrise_dev" && (
+            <button type="button" className={`admin-tab${activeTab === "sites" ? " admin-tab--active" : ""}`} onClick={() => setActiveTab("sites")}>All Sites</button>
+          )}
+        </div>
+
+        <div style={{ display: activeTab === "leads" ? "block" : "none" }}><LeadsTab /></div>
+        <div style={{ display: activeTab === "visitors" ? "block" : "none" }}><VisitorsTab /></div>
+        {role === "dreamrise_dev" && (
+          <div style={{ display: activeTab === "sites" ? "block" : "none" }}><SitesTab /></div>
+        )}
+
+        <div style={{ display: activeTab === "content" ? "block" : "none" }}>
 
         {/* 1 — Business Info */}
         <Section

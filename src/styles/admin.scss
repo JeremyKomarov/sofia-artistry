@@ -1,6 +1,28 @@
+// Admin UI — light shell, independent of the site's dark theme.
+// Uses its own token set so it works across any project palette.
+// Never import from the project's _variables.scss here.
 @use 'sass:color';
-@use 'variables' as *;
-@use 'mixins' as *;
+
+$cream:       #f8f6f2;
+$cream-2:     #f1ede8;
+$cream-3:     #ebe6e0;
+$white:       #ffffff;
+$ink:         #1a1814;
+$ink-soft:    #3d352c;
+$ink-muted:   #6b5e50;
+$ink-subtle:  #8a7a6f;
+$border:      #ddd7cf;
+$border-soft: #e6e1db;
+$gold:        #8a7555;
+$rose:        #c9956e;
+$rose-deep:   #b8815a;
+$font-body:   'DM Sans', system-ui, sans-serif;
+$font-display:'Cormorant Garamond', serif;
+$radius-sm:   6px;
+$radius:      10px;
+$radius-lg:   16px;
+$shadow-sm:   0 1px 4px rgba(0,0,0,0.08);
+$shadow-lg:   0 8px 32px rgba(0,0,0,0.14);
 
 // Scoped reset for admin shell
 .admin-shell *, .admin-shell *::before, .admin-shell *::after {
@@ -567,6 +589,12 @@
     }
   }
 
+  &--no-preview {
+    grid-template-columns: 1fr;
+
+    .admin-split__preview { display: none; }
+  }
+
   &__sidebar {
     overflow-y: auto;
     min-width: 0;
@@ -701,6 +729,7 @@
   background: $white;
   flex-shrink: 0;
   margin-top: 16px;
+  margin-bottom: 16px;
 }
 
 .admin-tab {

@@ -18,10 +18,7 @@ export function ContentProvider({ children }) {
     // setTimeout defers setState out of the synchronous effect body.
     try {
       const stored = localStorage.getItem(DRAFT_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        setTimeout(() => setDraft(parsed), 0);
-      }
+      if (stored) setDraft(JSON.parse(stored));
     } catch {}
 
     // React to changes written by the admin editor window
@@ -30,8 +27,19 @@ export function ContentProvider({ children }) {
       if (e.newValue === null) { setDraft(null); return; }
       try { setDraft(JSON.parse(e.newValue)); } catch {}
     }
+
+    function onMessage(e) {
+      if (e.origin !== window.location.origin) return;
+      if (!e.data || e.data.type !== '__preview_draft') return;
+      setDraft(e.data.data);
+    }
+
     window.addEventListener('storage', onStorage);
-    return () => window.removeEventListener('storage', onStorage);
+    window.addEventListener('message', onMessage);
+    return () => {
+      window.removeEventListener('storage', onStorage);
+      window.removeEventListener('message', onMessage);
+    };
   }, []);
 
   return <Ctx.Provider value={draft}>{children}</Ctx.Provider>;
