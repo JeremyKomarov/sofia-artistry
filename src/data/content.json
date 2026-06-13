@@ -296,7 +296,7 @@
     ]
   },
   "SECTIONS": {
-    "trust": true,
+    "trust": false,
     "services": true,
     "gallery": true,
     "reviews": true,
